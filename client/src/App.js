@@ -1,7 +1,13 @@
-import "./App.css";
+import React from "react";
+import PostCreate from "./PostCreate";
 
-function App() {
-  return <div className="App">Post1234</div>;
-}
+const App = () => {
+  return (
+    <div className="container">
+      <h1>Create Post</h1>
+      <PostCreate />
+    </div>
+  );
+};
 
 export default App;
