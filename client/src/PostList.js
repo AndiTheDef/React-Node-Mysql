@@ -1,13 +1,14 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import CommentCreate from "./CommentCreate";
 
-export default function PostList() {
+export default function PostList({ title }) {
   const [posts, setPosts] = useState({});
 
   useEffect(() => {
     fetchPosts();
-  }, []);
+  }, [title]);
 
   const renderedPosts = Object.values(posts).map((post) => {
     return (
@@ -16,9 +17,10 @@ export default function PostList() {
         className="card"
         style={{ width: "30%", marginBottom: "20px" }}
       >
-        <div className="card-body">
+        <div className="card-body" >
           <h3>{post.title}</h3>
         </div>
+        <CommentCreate postId={post.id} />
       </div>
     );
   });
@@ -28,5 +30,9 @@ export default function PostList() {
     setPosts(res.data);
   };
 
-  return <div className="d-flex flex-row flex-wrap justify-content-between">{renderedPosts}</div>;
+  return (
+    <div className="d-flex flex-row flex-wrap justify-content-between">
+      {renderedPosts}
+    </div>
+  );
 }

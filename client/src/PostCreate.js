@@ -1,8 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 import axios from "axios";
 
-export default function PostCreate() {
-  const [title, setTitle] = useState("");
+export default function PostCreate({ title, setTitle }) {
 
   const onSubmit = async (e) => {
     e.preventDefault();
@@ -26,7 +25,7 @@ export default function PostCreate() {
             onChange={(e) => setTitle(e.target.value)}
           />
         </div>
-        <button className="btn btn-primary">Submit</button>
+        <button className="btn btn-primary mt-2">Submit</button>
       </form>
     </div>
   );
