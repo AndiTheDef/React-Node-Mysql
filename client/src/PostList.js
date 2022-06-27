@@ -2,9 +2,11 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import CommentCreate from "./CommentCreate";
+import CommentList from "./CommentList";
 
 export default function PostList({ title }) {
   const [posts, setPosts] = useState({});
+  const [active, setActive] = useState(false);
 
   useEffect(() => {
     fetchPosts();
@@ -17,10 +19,11 @@ export default function PostList({ title }) {
         className="card"
         style={{ width: "30%", marginBottom: "20px" }}
       >
-        <div className="card-body" >
+        <div className="card-body">
           <h3>{post.title}</h3>
         </div>
-        <CommentCreate postId={post.id} />
+        <CommentList postId={post.id} active={active}/>
+        <CommentCreate postId={post.id} setActive={setActive} active={active}/>
       </div>
     );
   });
