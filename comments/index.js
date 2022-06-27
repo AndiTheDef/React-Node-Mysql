@@ -20,7 +20,7 @@ app.post("/posts/:id/comments", async (req, res) => {
   const { content } = req.body;
 
   const comments = commentsByPostId[req.params.id] || [];
-  comments.push({ id: commentId, content });
+  comments.push({ id: commentId, content, status: "pending" });
 
   commentsByPostId[req.params.id] = comments;
 
@@ -31,6 +31,7 @@ app.post("/posts/:id/comments", async (req, res) => {
         id: commentId,
         content,
         postId: req.params.id,
+        status: "pending",
       },
     })
     .catch((err) => {
@@ -39,12 +40,10 @@ app.post("/posts/:id/comments", async (req, res) => {
   res.status(201).send(comments);
 });
 
-app
-  .post("/events", (req, res) => {
-    console.log("event recevied", req.body.type);
-    res.send({});
-  })
-
+app.post("/events", (req, res) => {
+  console.log("event recevied", req.body.type);
+  res.send({});
+});
 
 app.listen(4001, () => {
   console.log("lisening and started");

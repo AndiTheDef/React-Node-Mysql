@@ -13,6 +13,7 @@ export default function PostList({ title }) {
   }, [title]);
 
   const renderedPosts = Object.values(posts).map((post) => {
+    console.log("post", post);
     return (
       <div
         key={post.id}
@@ -22,14 +23,14 @@ export default function PostList({ title }) {
         <div className="card-body">
           <h3>{post.title}</h3>
         </div>
-        <CommentList postId={post.id} active={active}/>
-        <CommentCreate postId={post.id} setActive={setActive} active={active}/>
+        <CommentList comments={post?.comments} active={active} />
+        <CommentCreate postId={post.id} setActive={setActive} active={active} />
       </div>
     );
   });
 
   const fetchPosts = async () => {
-    const res = await axios.get("http://localhost:4000/posts");
+    const res = await axios.get("http://localhost:4002/posts");
     setPosts(res.data);
   };
 
